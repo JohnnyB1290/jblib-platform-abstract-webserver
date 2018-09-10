@@ -244,7 +244,7 @@
 #endif
 
 /** Set this to 1 to send URIs without extension without headers
- * (who uses this at all??) */
+ * (who uses this at all?) */
 #if !defined LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI || defined __DOXYGEN__
 #define LWIP_HTTPD_OMIT_HEADER_FOR_EXTENSIONLESS_URI 0
 #endif
