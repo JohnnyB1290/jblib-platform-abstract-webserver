@@ -35,20 +35,20 @@
 #include "fs.h"
 #include "fsdata.h"
 #include <string.h>
-#include "ff.h"
 #include "lwip/mem.h"
 
 #if HTTPD_USE_CUSTOM_FSDATA
 #include "fsdata_custom.c"
-#else /* HTTPD_USE_CUSTOM_FSDATA */
-#include "fsdata.c"
-#endif /* HTTPD_USE_CUSTOM_FSDATA */
-
+#include "ff.h"
 /* Internal File descriptor structure */
 struct file_ds {
 	FIL fi;
 	int fi_valid;
 };
+#else /* HTTPD_USE_CUSTOM_FSDATA */
+#include "fsdata.c"
+#endif /* HTTPD_USE_CUSTOM_FSDATA */
+
 
 /*-----------------------------------------------------------------------------------*/
 
