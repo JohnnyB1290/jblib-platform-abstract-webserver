@@ -88,6 +88,10 @@
  * about an unknown extension, make sure to add it (and its doctype) to
  * the 'g_psHTTPHeaders' list.
  */
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+
 #include "lwip/init.h"
 #include "httpd.h"
 #include "lwip/debug.h"
@@ -2544,7 +2548,7 @@ http_poll(void *arg, struct tcp_pcb *pcb)
     /* If this connection has a file open, try to send some more data. If
      * it has not yet received a GET request, don't do this since it will
      * cause the connection to close immediately. */
-    if(hs && (hs->handle)) {
+    if(hs->handle) {
       LWIP_DEBUGF(HTTPD_DEBUG | LWIP_DBG_TRACE, ("http_poll: try to send more data\n"));
       if(http_send(pcb, hs)) {
         /* If we wrote anything to be sent, go ahead and send it now. */
@@ -2697,11 +2701,10 @@ http_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 	}
 	tcp_recved(pcb, p->tot_len);
 	err_t err = websocket_parse(pcb, p);
-	if (p != NULL) {
-		/* otherwise tcp buffer hogs */
-		LWIP_DEBUGF(HTTPD_DEBUG, ("[wsoc] freeing buffer\n"));
-		pbuf_free(p);
-	}
+	/* otherwise tcp buffer hogs */
+	LWIP_DEBUGF(HTTPD_DEBUG, ("[wsoc] freeing buffer\n"));
+	pbuf_free(p);
+
 	if (err == ERR_CLSD) {
 		http_close_conn(pcb, hs);
 	}
