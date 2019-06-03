@@ -1678,7 +1678,7 @@ http_find_error_file(struct http_state *hs, u16_t error_nr)
     if (err != ERR_OK) {
       err = fs_open(&hs->file_handle, uri3);
       if (err != ERR_OK) {
-        LWIP_DEBUGF(HTTPD_DEBUG, ("Error page for error %"U16_F" not found\n",
+        LWIP_DEBUGF(HTTPD_DEBUG, ("Error page for error %" U16_F " not found\n",
           error_nr));
         return ERR_ARG;
       }
@@ -1996,7 +1996,7 @@ http_parse_request(struct pbuf *inp, struct http_state *hs, struct tcp_pcb *pcb)
 
 #if LWIP_HTTPD_SUPPORT_REQUESTLIST
 
-  LWIP_DEBUGF(HTTPD_DEBUG, ("Received %"U16_F" bytes\n", p->tot_len));
+  LWIP_DEBUGF(HTTPD_DEBUG, ("Received %" U16_F " bytes\n", p->tot_len));
 
   /* first check allowed characters in this pbuf? */
 
@@ -2772,7 +2772,7 @@ http_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
        if (hs->post_content_len_left == 0)
 #endif /* LWIP_HTTPD_SUPPORT_POST */
         {
-          LWIP_DEBUGF(HTTPD_DEBUG | LWIP_DBG_TRACE, ("http_recv: data %p len %"S32_F"\n", (const void*)hs->file, hs->left));
+          LWIP_DEBUGF(HTTPD_DEBUG | LWIP_DBG_TRACE, ("http_recv: data %p len %" S32_F "\n", (const void*)hs->file, hs->left));
           http_send(pcb, hs);
         }
       } else if (parsed == ERR_ARG) {
