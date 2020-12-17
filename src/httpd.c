@@ -372,10 +372,9 @@ char *http_cgi_param_vals[LWIP_HTTPD_MAX_CGI_PARAMETERS]; /* Values for each ext
 static struct http_state *http_connections;
 
 
-#if LWIP_HTTPD_STRNSTR_PRIVATE
 /** Like strstr but does not need 'buffer' to be NULL-terminated */
 static char*
-strnstr(const char* buffer, const char* token, size_t n)
+myStrnstr(const char* buffer, const char* token, size_t n)
 {
   const char* p;
   int tokenlen = (int)strlen(token);
@@ -389,7 +388,6 @@ strnstr(const char* buffer, const char* token, size_t n)
   }
   return NULL;
 }
-#endif /* LWIP_HTTPD_STRNSTR_PRIVATE */
 
 static void
 http_add_connection(struct http_state *hs)
@@ -2033,7 +2031,7 @@ http_parse_request(struct pbuf *inp, struct http_state *hs, struct tcp_pcb *pcb)
     char *key_start = strncasestr(data, WS_KEY, data_len);
     if (key_start) {
       key_start += sizeof(WS_KEY) - 1;
-      char *key_end = strnstr(key_start, CRLF, data_len);
+      char *key_end = myStrnstr(key_start, CRLF, data_len);
       if (key_end) {
         char key[64];
         int len = sizeof(char) * (key_end - key_start);
